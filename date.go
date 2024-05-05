@@ -74,12 +74,13 @@ func UnixMilli(msec int64) Date {
 
 // Add returns a new Date through time.Time.Add
 // Note that since we restirct ourselves to days, anything less than 24 hours
-// will return the same Date
-// Be also aware, that if you use a negative duration, even the slighest will
-// result in the day before, as the underlying time is 00:00:00.000 of that date
+// will return the same Date, both for positive and negative durations.
 func (d Date) Add(dn time.Duration) Date {
-	newTime := d.t.Add(dn)
-	return timeToDate(newTime)
+	// to avoid problems calculating from 00:00, we convert the duration added
+	// to hours, and then truncate them to an integer, so -24.5 becomes -24
+	// then we divide by 24 maintaining our int type, meaning any remainder will
+	// be discarded; thus 50 hours become 2 days (48 hours).
+	return timeToDate(d.t.AddDate(0, 0, int(dn.Hours())/24))
 }
 
 // AddDate returns a new Date through time.Time.AddDate

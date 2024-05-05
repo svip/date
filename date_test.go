@@ -70,6 +70,46 @@ func TestNewDateFromTime(t *testing.T) {
 	}
 }
 
+func TestDateAddPositive(t *testing.T) {
+	d := date.NewDate(2024, time.June, 5)
+	d2 := d.Add(12 * time.Hour)
+	if !d.Equal(d2) {
+		t.Fatalf("Dates should be equal, but was %v and %v", d, d2)
+	}
+	d3 := d.Add(24 * time.Hour)
+	if !d.AddDate(0, 0, 1).Equal(d3) {
+		t.Fatalf("Dates should be equal, but was %v and %v", d.AddDate(0, 0, 1), d3)
+	}
+	d4 := d.Add(50 * time.Hour)
+	if !d.AddDate(0, 0, 2).Equal(d4) {
+		t.Fatalf("Dates should be equal, but was %v and %v", d.AddDate(0, 0, 1), d4)
+	}
+}
+
+func TestDateAddNegative(t *testing.T) {
+	d := date.NewDate(2024, time.June, 5)
+	d2 := d.Add(-12 * time.Hour)
+	if !d.Equal(d2) {
+		t.Fatalf("Dates should be equal, but was %v and %v", d, d2)
+	}
+	d3 := d.Add(-24 * time.Hour)
+	if !d.AddDate(0, 0, -1).Equal(d3) {
+		t.Fatalf("Dates should be equal, but was %v and %v", d.AddDate(0, 0, -1), d3)
+	}
+	d4 := d.Add(-50 * time.Hour)
+	if !d.AddDate(0, 0, -2).Equal(d4) {
+		t.Fatalf("Dates should be equal, but was %v and %v", d.AddDate(0, 0, -1), d4)
+	}
+}
+
+func TestDateAddNegativeLeastAmount(t *testing.T) {
+	d := date.NewDate(2024, time.June, 5)
+	d2 := d.Add(-1 * time.Nanosecond)
+	if !d.Equal(d2) {
+		t.Fatalf("Dates should be equal, but was %v and %v", d, d2)
+	}
+}
+
 func TestDateEqual(t *testing.T) {
 	d1 := date.NewDate(2024, time.June, 5)
 	t2 := time.Date(2024, time.June, 5, 15, 2, 3, 0, time.UTC)
