@@ -10,7 +10,7 @@ const (
 	ISO8601Date = "2006-01-02"
 )
 
-// The Date type represents a date, with its unlying type being a time.Time.
+// The Date type represents a date, with its underlying type being a time.Time.
 // It restricts itself to being time.UTC to avoid any time zone issues.
 type Date struct {
 	t time.Time
@@ -73,7 +73,7 @@ func UnixMilli(msec int64) Date {
 }
 
 // Add returns a new Date through time.Time.Add
-// Note that since we restirct ourselves to days, anything less than 24 hours
+// Note that since we restrict ourselves to days, anything less than 24 hours
 // will return the same Date, both for positive and negative durations.
 func (d Date) Add(dn time.Duration) Date {
 	// to avoid problems calculating from 00:00, we convert the duration added
@@ -211,7 +211,7 @@ func (d Date) IsZero() bool {
 	return d.t.IsZero()
 }
 
-// Local is kept here for function compatbility with time.Time,
+// Local is kept here for function compatibility with time.Time,
 // but it does nothing and simply returns the same Date
 func (d Date) Local() Date {
 	return d
