@@ -71,3 +71,32 @@ As mentioned, it has all the same functions as `time.Time`, with the
 `time.Time` type for variables having been replaced with `date.Date`, in all
 but one case.  This means you can use it as a drop-in replacement, but when
 comparing to other times, they must be `date.Date`.
+
+Reflections
+-----------
+
+It might seem questionable to create a library with a single `struct`, as it
+feels it is approaching an almost `npm`-level of specialised packages.  And
+indeed, if that concerns you, you can simply copy the code, as the Unlicence
+provides no restrictions on the code.
+
+However, there are times where the distinguishing between a date time and a
+date is useful.  And using `time.Time` provides no such distinction.  Imagine
+a library that builds a database based on `struct`s, the only way for it to do
+so correctly, would be to use an annotation option.  But while that's available
+for `struct`s, it won't be for function calls.
+
+If there was a "standard" version of `date.Date`, that all these libraries
+referred to, it would be easier to differentiate between date times and dates.
+Though, perhaps a bit ambitious of me to suggest this might become any form of
+"standard".
+
+Another question to consider; why use `time.Time` as an underlying type, and
+not simply just keep year, month and day?  And that might indeed a future
+rewrite to avoid any potential problems with time zones and daylight saving
+time, though I believe I have avoided the most of those faults, by enforcing the
+`time.Time` instance to always be `time.UTC`.
+
+But initially the motivation was simply that `time.Time` already had a lot of
+functionality regarding dates, that on an initial version felt unnecessary to
+re-implement.
