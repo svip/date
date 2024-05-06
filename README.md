@@ -6,7 +6,7 @@ it supports everything that `time.Time` can do.  It is function compatible with
 `time.Time`, and can thus be used as a drop-in replacement.  Indeed, most of its
 functions are merely call-throughs to `time.Time`'s functions.
 
-[![Go.Dev reference](https://img.shields.io/badge/go.dev-reference-blue?logo=go&logoColor=white)](https://pkg.go.dev/svip/date?tab=doc)
+[![Go.Dev reference](https://img.shields.io/badge/go.dev-reference-blue?logo=go&logoColor=white)](https://pkg.go.dev/github.com/svip/date?tab=doc)
 
 Motivations
 -----------
