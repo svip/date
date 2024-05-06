@@ -1,3 +1,3 @@
 module github.com/svip/date
 
-go 1.21.8
+go 1.19

@@ -113,11 +113,6 @@ func (d Date) Clock() (hour int, min int, sec int) {
 	return d.t.Clock()
 }
 
-// Compare compares itself to another [Date] through [time.Time.Compare].
-func (d Date) Compare(e Date) int {
-	return d.t.Compare(e.t)
-}
-
 // Date returns the year, month and day for the [Date] through [time.Time.Date].
 func (d Date) Date() (year int, month time.Month, day int) {
 	return d.t.Date()
