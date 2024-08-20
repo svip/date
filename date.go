@@ -14,6 +14,9 @@ const (
 // [time.Time].
 // It restricts itself to being [time.UTC] to avoid any time zone issues.
 type Date struct {
+	// we implement Date as a struct rather than simply as a time.Time to ensure
+	// that a time.Time cannot be cast to a date.Date, since that would
+	// undermine date.Date's guarantees
 	t time.Time
 }
 
@@ -78,6 +81,9 @@ func UnixMilli(msec int64) Date {
 //
 // Note that since we restrict ourselves to days, anything less than 24 hours
 // will return the same [Date], both for positive and negative durations.
+//
+// This function is kept for compatibility with [time.Time], it is recommended
+// that you use [date.Date.AddDate] instead.
 func (d Date) Add(dn time.Duration) Date {
 	// to avoid problems calculating from 00:00, we convert the duration added
 	// to hours, and then truncate them to an integer, so -24.5 becomes -24

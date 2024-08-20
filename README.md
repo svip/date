@@ -11,6 +11,8 @@ functions are merely call-throughs to `time.Time`'s functions.
 Motivations
 -----------
 
+### JSON parsing
+
 Consider the following JSON object using ISO 8601 date format:
 
 ```
@@ -50,6 +52,18 @@ type Data struct {
 
 The `date.Date` has a `.Time()` function that returns the underlying `time.Time`
 representation.
+
+### Equality
+
+Comparing two `time.Time`s is a fraught business, as they may have different
+underlying `time.Location`s.  Therefore `time.Time` has `time.Time.Equal` to
+compensate for this.  However, that means `time.Time` cannot really be useful
+as a simple type, like an index for a `map` or compared `struct`s with
+`time.Time` on their fields.
+
+With `date.Date`, dates are guaranteed to be comparable as a simple Go type.
+This means you can use `date.Date` as an index for a `map`, without concerns
+about the origin of your dates.
 
 Considerations
 --------------
