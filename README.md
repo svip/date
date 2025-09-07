@@ -8,6 +8,15 @@ functions are merely call-throughs to `time.Time`'s functions.
 
 [![Go.Dev reference](https://img.shields.io/badge/go.dev-reference-blue?logo=go&logoColor=white)](https://pkg.go.dev/github.com/svip/date?tab=doc)
 
+Deprecation
+-----------
+
+With the introduction of
+[encoding/json/v2](https://pkg.go.dev/encoding/json/v2), one can now specify a
+`time.Format()` for a given struct property.  The inability to do so was the
+primary motivation behind this library.  Going forward, once encoding/json/v2
+stabilises, it is recommended to use that rather than this library.
+
 Motivations
 -----------
 
